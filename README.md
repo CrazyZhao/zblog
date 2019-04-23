@@ -1,6 +1,5 @@
 # zblog
-  
- -[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 该项目是使用spring boot + thymeleaf 开发个人博客项目.
 

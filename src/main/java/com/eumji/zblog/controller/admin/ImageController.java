@@ -35,7 +35,7 @@ public class ImageController {
     @Resource
     private PhotoUploadUtil photoUploadUtil;
 
-    @RequestMapping("/imageUpload")
+    @RequestMapping("/admin/article/imageUpload")
     public PhotoResult imageUpload(@RequestParam(value = "editormd-image-file",required = true) MultipartFile file){
         PhotoResult result = null;
         //设置filename

@@ -65,7 +65,7 @@ public class PhotoUploadUtil {
     public PhotoResult uploadPhoto(String realName, String filename){
         PhotoResult result = new PhotoResult();
         try {
-            Configuration cfg = new Configuration(Zone.zone2());
+            Configuration cfg = new Configuration(Zone.zone0());
             Response response = new UploadManager(cfg).put(realName, getFilePath(filename), getUpToken());
             if (response.isOK()){
                 result.setSuccess(1);

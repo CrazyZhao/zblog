@@ -8,10 +8,10 @@ app:
 
 ##七牛云的key
 qiniu:
-  accessKey: canKgBzqR_AN_EviuOuWYUT4Vko3gi5dTNZFiQ4C
-  secretKey: feAWGHn_UmhGU2ckkHd9F2q2qFpC7lPqlemvEOCH
-  bucketName: eumji025
-  basePath: http://of8rkrh1w.bkt.clouddn.com/
+  accessKey: umhMikIiPQbsgP4KBy9DFp6Ec2TzHszbJXzjmWyA
+  secretKey: iOBAofr0CjDnimfMQ1fc3LkqRDfjuE0iR-RsuV78
+  bucketName: bright
+  basePath: http://cdn.backender.cn/
 
 ## 百度推送
 baidu:

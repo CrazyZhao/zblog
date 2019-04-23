@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eumji.zblog.mapper.ArticleMapper">
+    <cache eviction="LRU" flushInterval="60000" readOnly="true"/>
+    <resultMap id="article" type="com.eumji.zblog.vo.ArticleCustom">
+        <id column="id" property="id"></id>
+        <result column="categoryId" property="categoryId"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="status" property="status"/>
+        <result column="author" property="author"/>
+        <result column="createTime" property="createTime"/>
+        <result column="showCount" property="showCount"/>
+        <collection property="tagList" column="id" select="getTag"/>
+
+    </resultMap>
+
+    <!--获取所有的文章-->
+   <select id="getArticleCount" resultType="int">
+       select count(id) from article where status = 1
+   </select>
+    <!--分页获取文章-->
+    <select id="getArticleList" resultMap="article">
+
+        select article.id,categoryId,categoryName,aliasName,title,content,description,status,author,createTime,updateTime,showCount from article,category where status=1 and article.categoryId = category.id order by createTime desc limit #{start},#{limit}
+    </select>
+    <!--通过文章id获取tag列表-->
+    <select id="getTag" resultType="articleTag">
+        select * from articletag where articleId = #{id}
+    </select>
+    <!--通过分类获取所有的文章-->
+    <select id="loadArticleByCategory" resultMap="article">
+         select article.id,categoryId,categoryName,aliasName,title,content,description,status,author,createTime,updateTime,showCount from article,category where status=1 and article.categoryId=category.id and  categoryId=#{categoryId} and article.categoryId = category.id order by createTime desc limit #{pager.start},#{pager.limit}
+    </select>
+
+    <!--通过tag加载文章-->
+    <select id="loadArticleByTag" resultMap="article">
+       select article.id,categoryId,categoryName,aliasName,title,content,description,status,author,createTime,updateTime,showCount from article,category where status=1 and article.categoryId=category.id and article.id in (select DISTINCT articleId from articletag where tagId = #{tagId} ) order by createTime desc limit #{pager.start},#{pager.limit}
+
+    </select>
+    <!--获取所有的文章数量-->
+    <select id="initPage" resultType="int">
+      select count(id) from article
+    </select>
+    <!--条件查询文章-->
+    <select id="loadArticle" resultType="article" parameterType="map">
+        select article.id,title,categoryId,categoryName,status,createTime from article join category on article.categoryId=category.id where 1=1
+        <if test="categoryId != null and categoryId != ''">
+            and categoryId = #{categoryId}
+        </if>
+        /*2017年5yue19日 修复bug articletag.tagId错写成articletag.id*/
+        <if test="tags != null and tags != ''">
+            and article.id in (select DISTINCT articleId from articletag where articletag.tagId in
+            <foreach collection="tags" item="item" index="index" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            )
+        </if>
+        <if test="title != null and title != ''">
+            and title like concat('%',#{title},'%')
+        </if>
+        order by createTime desc limit #{pager.start},#{pager.limit}
+    </select>
+
+    <!--更新文章状态-->
+    <update id="updateStatue">
+        update article set status = #{status} where id = #{id}
+    </update>
+
+    <!--保存文章-->
+    <insert id="saveArticle">
+        insert into article(id,categoryId, title, content, description, createTime) values(#{id},#{categoryId},#{title},#{content},#{description},#{createTime})
+    </insert>
+    <!--保存文章标签-->
+    <insert id="saveArticleTag">
+        INSERT into articletag(articleId, tagId, tagName)
+        <foreach collection="tags" item="item" index="index" separator=" union all">
+            SELECT #{articleId},#{item},(select tagName from tag where id =#{item})
+        </foreach>
+    </insert>
+    <!--检查是否已经存在-->
+    <select id="checkExist" resultType="int">
+        select count(id) from article where id = #{id}
+    </select>
+    <!--通过id查找文章-->
+    <select id="getArticleById" resultType="article">
+        select id,title,description,content,categoryId from article where id = #{id}
+    </select>
+
+    <!--更新文章-->
+    <update id="updateArticle">
+        update article set title = #{title},description = #{description},content = #{content},updateTime = #{updateTime},categoryId = #{categoryId} where id = #{id}
+    </update>
+    
+    <delete id="deleteArticleTag">
+        delete from articletag where articleId = #{articleId}
+    </delete>
+
+    <!--删除文章-->
+    <delete id="deleteArticle">
+        delete from article where id = #{id}
+    </delete>
+    <!--通过id查找 博文的详细信息-->
+    <select id="getArticleCustomById" resultMap="article">
+        select article.id,categoryId,categoryName,aliasName,title,content,description,status,author,createTime,updateTime,showCount from article,category where status=1 and article.categoryId = category.id and article.id = #{id}
+    </select>
+
+    <!--获取上一篇文章信息  大于当前时间且最靠近当前时间的第一篇 -->
+    <select id="getLastArticle" resultType="article">
+        select id,title from article where createTime &gt; (select createTime from article where id = #{id}) ORDER BY createTime asc LIMIT 1
+    </select>
+
+    <!--获取下一篇文章信息 小于当前时间且最靠近当前时间的第一篇-->
+    <select id="getNextArticle" resultType="article">
+        select id,title from article where createTime &lt; (select createTime from article where id = #{id}) ORDER BY createTime desc LIMIT 1
+    </select>
+    <!--增加文章的阅读量-->
+    <update id="addArticleCount">
+        update article set showCount = showCount+1 where id = #{id}
+    </update>
+
+    <!--最受欢迎的十篇文章-->
+    <select id="popularArticle" resultMap="article">
+
+       select article.id,categoryId,categoryName,aliasName,title,content,description,status,author,createTime,updateTime,showCount
+       from article,category where status=1 and article.categoryId = category.id order by article.showCount desc limit 10
+
+    </select>
+
+    <!--获取articleId-->
+    <select id="getArticleId" resultType="string">
+        select id from article WHERE  status = 1
+    </select>
+
+    <!--通过关键字查找文章-->
+    <select id="getArticleListByKeywords" resultType="article">
+        <if test="keyword != null and keyword != ''">
+            select id,title,description from article where title like concat('%',#{keyword},'%') or description like concat('%',#{keyword},'%') or content like concat('%',#{keyword},'%') limit 0,10
+        </if>
+        <if test="keyword == null or keyword == ''">
+            select id,title,description from article limit 0,10
+        </if>
+    </select>
+    <!--获取文章的时间归档列表 -->
+    <select id="articleArchiveList" resultType="java.util.Map">
+        select DATE_FORMAT(createTime,'%Y年%m月') createTime,count(id) count from article  group by DATE_FORMAT(createTime,'%Y年%m月') ORDER BY createTime desc
+    </select>
+    <!--按时间归档加载文章-->
+    <select id="loadArticleByArchive" resultMap="article">
+         select article.id,categoryId,categoryName,aliasName,title,content,description,status,author,createTime,updateTime,showCount from article,category where status=1 and article.categoryId=category.id and  DATE_FORMAT(article.createTime,'%Y年%m月')=#{createTime} and article.categoryId = category.id order by createTime desc limit #{pager.start},#{pager.limit}
+    </select>
+
+    <update id="updateCategoryId" parameterType="int">
+      update article set categoryId = 99999 where categoryId = #{categoryId}
+    </update>
+
+</mapper>

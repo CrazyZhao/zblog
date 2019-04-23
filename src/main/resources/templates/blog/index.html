@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="blog/part/head :: head"></head>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/load.css">
+    <meta name="baidu-site-verification" content="JATuXcYrH9" />
+</head>
+<body>
+<!--<div class="loader"></div>-->
+<div id="container">
+    <header id="header" th:replace="blog/part/header :: header">
+    </header>
+
+    <div class="outer">
+
+        <aside id="profile">
+            <!--个人基础信息-->
+            <div class="inner profile-inner" th:replace="blog/part/base-of-me :: base_of_me"></div>
+            <!--友情链接-->
+            <div class="inner profile-inner" th:replace="blog/part/friend-link :: friend_link"></div>
+            <!--微信公众号信息-->
+            <!--<div class="inner profile-inner" th:replace="blog/part/wechat-info :: wechat_info"></div>-->
+        </aside>
+
+
+        <section id="main">
+            <div id="loader-wrapper">
+                <div id="loader"></div>
+                <div class="loader-section section-left"></div>
+                <div class="loader-section section-right"></div>
+                <div class="load_title">正在加载Bright站点....<br><span>V1.0</span></div>
+            </div>
+            <div id="main-article"></div>
+            <div style="margin-top: -29px;height:50px">
+                <div style="float: left;display: none" class="pagination">共
+                <span id="total-num"></span>
+                条记录
+                <span id="current-page"></span>
+                /
+                <span id="total-page"></span>
+            </div>
+
+
+                <div id="pagination" data-type="article" class="pagination" style="float: right">
+                </div>
+
+            </div>
+        </section>
+
+        <aside id="sidebar">
+            <!--公告-->
+            <div class="widget-wrap" th:replace="blog/part/announcement :: announcement"></div>
+            <!--每日一言-->
+            <div class="widget-wrap" th:replace="blog/part/aphorism :: aphorism"></div>
+            <!--文章分类-->
+            <div class="widget-wrap" th:replace="blog/part/classification :: classification"></div>
+            <!--文章分类-->
+            <div class="widget-wrap" th:replace="blog/part/article-archive :: article-archive"></div>
+           <!-- <div class="widget-wrap" th:replace="blog/part/label-info :: label-info"></div>-->
+
+            <div id="toTop" class="fa fa-angle-up"></div>
+        </aside>
+
+    </div>
+
+    <footer id="footer" th:replace="blog/part/footer :: footer"></footer>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/share.js"></script>
+<script src="/js/jqPaginator.min.js"></script>
+<script src="/admin/js/plugins/chosen/chosen.jquery.js"></script>
+<!-- Custom Scripts -->
+<script src="/js/insight.js"></script>
+<script src="/js/lightgallery.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tctip-1.0.3.min.js"></script>
+<script>
+    new tctip({
+        top: '20%',
+        button: {
+            id: 9,
+            type: 'dashang',
+        },
+        list: [
+            {
+                type: 'alipay',
+                qrImg: '/image/alipay.jpg'
+            }, {
+                type: 'wechat',
+                qrImg: '/image/wechat.jpg'
+            }, {
+                type: 'bitcoin',
+                qrContent: '1PhQySHF1ZuoRwoZ8G4CDLEtE6fAnD3GJP'
+            }
+        ]
+    }).init()
+</script>
+</body>
+</html>

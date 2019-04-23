@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eumji.zblog.mapper.CategoryMapper">
+
+    <select id="initPage" resultType="int">
+        select count(id) from category
+    </select>
+
+    <!--初始化首页的分类列表 以文章数量排序 2017-04-29解决查询bug 错误的将categoryid写成id-->
+    <select id="initCategoryList" resultType="categoryCustom">
+        SELECT
+            t1.id,
+            categoryName,
+            aliasName,
+            t2.articleCount
+        FROM
+            category t1
+        JOIN (
+            SELECT DISTINCT
+                categoryId id,
+                count(id) articleCount
+            FROM
+                article
+            GROUP BY
+                categoryId
+        ) t2 ON t1.id = t2.id
+        ORDER BY
+            articleCount DESC
+        </select>
+
+    <select id="getCategoryById" resultType="category">
+        SELECT id,categoryName,aliasName,sort FROM category where id = #{id}
+    </select>
+
+    <select id="loadCategory" resultType="category">
+        SELECT id,categoryName,aliasName,sort from category
+        <if test="categoryName != null and categoryName != ''">
+            WHERE categoryName like concat('%',#{categoryName},'%') or aliasName like concat('%',#{categoryName},'%')
+        </if>
+        limit #{pager.start},#{pager.limit}
+    </select>
+
+    <select id="checkExist" resultType="int">
+        select count(id) from category  where (categoryName=#{categoryName} or aliasName = #{aliasName})
+        <if test="id != null and id != ''">
+            and id != #{id}
+        </if>
+   </select>
+    <!--保存一个分类-->
+    <insert id="saveCategory">
+        insert into category(categoryName, aliasName, sort) values(#{categoryName},#{aliasName},#{sort})
+    </insert>
+    <!--更新分类-->
+    <update id="updateCategory">
+        update category set categoryName = #{categoryName},aliasName = #{aliasName}
+        <if test="sort != null and sort != ''">
+            ,sort = #{sort}
+        </if>
+        where id = #{id}
+    </update>
+
+    <!--获取所有的分类列表-->
+    <select id="getCategoryList" resultType="category">
+        select id,categoryName,aliasName from category
+    </select>
+
+    <!--获取某个分类的文章数量-->
+    <select id="ArticleCatePage" resultType="int">
+        select count(id) from article where categoryId = #{categoryId} and status = 1
+    </select>
+
+    <delete id="deleteCategoryById">
+        delete from category where id = #{categoryId}
+    </delete>
+</mapper>
+

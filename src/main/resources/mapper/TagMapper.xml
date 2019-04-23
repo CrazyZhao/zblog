@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eumji.zblog.mapper.TagMapper">
+
+    <select id="getTagCount" resultType="int">
+        select count(id) from tag
+    </select>
+
+    <select id="getTagById" resultType="tag">
+        select id,tagName,aliasName from tag where id = #{id}
+    </select>
+
+    <!--分页条件查询标签列表 2017年5月19日 修复条件查询错误 原因条件语句写成了恒等式 aliasName like aliasName-->
+    <select id="loadTagList" resultType="tag">
+        select id,tagName,aliasName from tag
+        <if test="tagName != null and tagName != ''">
+            where tagName like concat('%',#{tagName},'%') or aliasName like concat('%',#{tagName},'%')
+        </if>
+        limit #{pager.start},#{pager.limit}
+    </select>
+
+    <insert id="saveTag">
+        insert into tag(tagName, aliasName) VALUES (#{tagName},#{aliasName})
+    </insert>
+
+    <select id="checkExist" resultType="int">
+        SELECT count(id) from tag WHERE (tagName=#{tagName} or aliasName = #{aliasName})
+        <if test="id != null and id != '' ">
+            and id != #{id}
+        </if>
+    </select>
+
+    <update id="updateTag">
+        UPDATE tag set tagName = #{tagName},aliasName = #{aliasName} where id = #{id}
+    </update>
+
+    <select id="initPage" resultType="int">
+        SELECT COUNT(id) from tag
+    </select>
+
+    <select id="getTagList" resultType="tag">
+        select id,tagName,aliasName from tag
+    </select>
+
+    <!--2017年5月7日 修复查询articlepage的错误 原因是由于前面没用到,现在才发现名称写错了也没有过滤重复的id-->
+    <select id="articleTagPage" resultType="int">
+       select count(DISTINCT article.id) from articletag join article on articleId = article.id and article.status = 1 where tagId = #{tagId}
+    </select>
+
+    <delete id="deleteTagById">
+        delete from tag  where id = #{id}
+    </delete>
+
+    <delete id="deleteArticleTagById">
+        delete from articletag where tagId = #{id}
+    </delete>
+</mapper>

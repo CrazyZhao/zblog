@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="blog/part/head :: head"></head>
+
+<body>
+<div id="container">
+    <header id="header" th:replace="blog/part/header :: header">
+    </header>
+    <div class="outer">
+
+        <aside id="profile">
+            <!--个人基础信息-->
+            <div class="inner profile-inner" th:replace="blog/part/base-of-me :: base_of_me"></div>
+            <!--友情链接-->
+            <div class="inner profile-inner" th:replace="blog/part/friend-link :: friend_link"></div>
+            <!--微信公众号信息-->
+            <div class="inner profile-inner" th:replace="blog/part/wechat-info :: wechat_info"></div>
+        </aside>
+        <section id="main">
+
+        </section>
+
+        <aside id="sidebar">
+
+            <!--每日一言-->
+            <div class="widget-wrap" th:replace="blog/part/aphorism :: aphorism"></div>
+            <!--文章分类-->
+            <div class="widget-wrap" th:replace="blog/part/classification ::classification"></div>
+
+            <div class="widget-wrap" th:replace="blog/part/label-info :: label-info"></div>
+
+            <div id="toTop" class="fa fa-angle-up"></div>
+        </aside>
+
+    </div>
+
+    <footer id="footer">
+        <div class="outer">
+            <div id="footer-info" class="inner">
+                <div class="foot-row">
+
+                    <!-- <div style="clear: left;"></div>
+                     &copy; 2016 - 2017 程序猿DD | 博客 - 翟永超 版权所有<br>
+                     <div style="display: none;">
+                         <span id="busuanzi_container_site_pv">访问量<span class="foot-count" id="busuanzi_value_site_pv"></span>次</span>
+                         <span id="busuanzi_container_site_uv">访客数<span class="foot-count" id="busuanzi_value_site_uv"></span>人次</span>
+                     </div>-->
+                    <!--  沪ICP备14037150号-2-->
+                    <!--Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.-->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    <script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script src="/js/share.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!--友情链接部分-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<body>
+    <div class="inner profile-inner" th:fragment="friend_link">
+    <div class="widget-wrap widget-list">
+        <div class="widget">
+            <h3 class="follow">友情链接</h3>
+            <ul >
+                <!--/*@thymesVar id="partnerList" type="com.eumji.zblog.vo.Partner"*/-->
+                <li th:each="partList : ${partnerList}">
+                    <a target="_blank" th:href="${partList.siteUrl}" th:text="${partList.siteName}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

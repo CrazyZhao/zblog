@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eumji.zblog.mapper.UserMapper">
+    <!--通过username获取user对象-->
+    <select id="getUser" parameterType="String" resultType="user">
+        SELECT * from user where username = #{username}
+    </select>
+
+    <select id="allUser" resultType="user">
+        select * from user
+    </select>
+
+    <select id="getUserInfo" resultType="userInfo">
+
+        select * from user_info
+    </select>
+
+    <update id="updateAvatar">
+        update user_info set avatar = #{url} where username = #{username}
+    </update>
+
+
+    <update id="updatePassword">
+        update user set password = #{password} where username = #{username}
+    </update>
+
+    <update id="updateUserInfo">
+        update user_info set nickname = #{nickname},phone = #{phone},email = #{email},signature = #{signature},
+        address = #{address},wechart = #{wechart},telegram = #{telegram},announcement = #{announcement} where username = #{username}
+    </update>
+</mapper>

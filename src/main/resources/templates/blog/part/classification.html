@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<body>
+    <div class="widget-wrap" th:fragment="classification">
+        <h3 class="follow">文章分类</h3>
+        <div class="widget">
+            <ul class="category-list">
+                <li class="category-list-item" th:each="category : ${categoryList}" style="cursor: pointer">
+                    <!-- th:onclick="'loadCategory('+${category.id}+')'" -->
+                    <a class="category-list-link" th:data-id="${category.id}" th:text="${category.categoryName}"></a>
+                    <span class="category-list-count" th:text="${category.articleCount}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

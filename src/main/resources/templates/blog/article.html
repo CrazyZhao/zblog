@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="/image/avatar.jpg" />
+    <title>[[${article.title}]]</title>
+    <meta name="description" th:content="${article.description}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bright | 博客">
+    <meta property="og:url" content="http://www.bright876.com">
+    <meta property="og:site_name" content="Bright | 博客">
+    <meta property="og:description" th:content="${article.description}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Bright | 博客">
+    <meta name="twitter:description" th:content="${article.description}">
+    <meta name="keywords" content="Spring Boot, Spring,Linux,Java,Hadoop" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/editormd.preview.css" />
+    <link rel="stylesheet" href="/css/pagination.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/lightgallery/1.3.9/css/lightgallery.min.css">
+    <link rel="stylesheet" href="/css/share.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-8254913025324557",
+            enable_page_level_ads: true
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-86515876-2', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    <!--百度统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d0860f6c7721ce1eda7a584188cae847";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <!--百度自动推送-->
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+    <script async type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/load.css">
+    <style>
+        @media screen and (min-width: 1200px) {
+            #main {
+                display: inline;
+                float: left;
+                width: 74.9999999999%;
+                margin: 0 0.769230769230769%;
+            }
+        }
+        @media screen and (min-width: 1199px) and (max-width: 1199px) {
+            #main {
+                display: inline;
+                float: left;
+                width: 74.9999999999%;
+                margin: 0 0.769230769230769%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <header id="header" th:replace="blog/part/header :: header">
+    </header>
+    <div class="outer">
+
+        <aside id="profile">
+            <!--个人基础信息-->
+            <div class="inner profile-inner" th:replace="blog/part/base-of-me :: base_of_me"></div>
+            <!--友情链接-->
+            <div class="inner profile-inner" th:replace="blog/part/friend-link :: friend_link"></div>
+            <!--微信公众号信息-->
+          <!--  <div class="inner profile-inner" th:replace="blog/part/wechat-info :: wechat_info"></div>-->
+        </aside>
+
+        <section id="main">
+            <div id="loader-wrapper">
+                <div id="loader"></div>
+                <div class="loader-section section-left"></div>
+                <div class="loader-section section-right"></div>
+                <div class="load_title">正在加载Bright站点....<br><span>V1.0</span></div>
+            </div>
+
+            <article id="post-zuul-vs-nginx-performance" class="article article-type-post" itemscope="" itemprop="blogPost">
+                <div class="article-inner">
+
+                    <header class="article-header">
+
+
+                        <h1 class="article-title" itemprop="name">
+                            <span id="article-title" th:text="${article.title}"></span>
+                        </h1>
+
+
+
+                        <div class="article-meta">
+
+                            <div class="article-date">
+                                <i class="fa fa-calendar"></i>
+                                <a th:href="'/article/details/'+${article.id}" id="article-url">
+                                    <time datetime="2017-04-03" itemprop="datePublished" th:text="${#dates.format(article.createTime,'yyyy-MM-dd')}"></time>
+                                </a>
+                            </div>
+
+
+
+                            <div class="article-category" style="text-transform: none;">
+                                <i class="fa fa-folder"></i>
+                                <!--th:href="'/category/details/'+${articleList.categoryId}"-->
+                                <a class="article-category-link" th:onclick="'loadCategory('+${article.categoryId}+')'"  th:text="${article.categoryName}" style="cursor: pointer"></a>
+                            </div>
+
+                            <div class="share-container" style="text-transform: none;" th:each="tag : ${article.tagList}">
+                                <i class="fa fa-tag"></i>
+                                <!--th:href="'/tag/details/'+${tagListStat.tagId}"-->
+                                <a class="tag-link" th:onclick="'loadTag('+${tag.tagId}+')'"  th:text="${tag.tagName}" style="cursor: pointer"></a>
+                            </div>
+                        </div>
+
+
+                    </header>
+
+
+                    <div class="article-entry" itemprop="articleBody" lg-uid="lg0">
+                        <div id="article-content">
+                            <textarea id="append-test" style="display:none;" th:utext="${article.content}"></textarea>
+                        </div>
+
+                    </div>
+                    <footer class="article-footer">
+                        <div id="socialShare" class="socialShare active" th:data-content="${article.description}"
+                             th:data-title="${article.title}" th:data-url="'/article/details/'+${article.id}" th:data-desc="${article.description}"></
+                    </footer>
+                </div>
+
+
+                <nav id="article-nav">
+
+                    <a th:if="${lastArticle != null}" th:href="'/article/details/'+${lastArticle.id}" id="article-nav-newer" class="article-nav-link-wrap">
+                        <strong class="article-nav-caption">上一篇</strong>
+                        <div class="article-nav-title" th:text="${lastArticle.title}"></div>
+                    </a>
+
+
+                    <a th:if="${nextArticle != null}" th:href="'/article/details/'+${nextArticle.id}" id="article-nav-older" class="article-nav-link-wrap">
+                        <strong class="article-nav-caption">下一篇</strong>
+                        <div class="article-nav-title" th:text="${nextArticle.title}"></div>
+                    </a>
+
+                </nav>
+
+
+
+            </article>
+            <!--PC和WAP自适应版-->
+            <div id="SOHUCS" th:sid="${article.id}" ></div>
+            <script type="text/javascript">
+                (function(){
+                    var appid = 'cytkqf4PK'; //cysYcQMdM
+                    var conf = '1dc7aaa69c0f07c712d07dc71fcb2ddd'; //prod_12b546d584c5e5927876d7c322ee1e03
+                    var width = window.innerWidth || document.documentElement.clientWidth;
+                    if (width < 960) {
+                        window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+                    } else {
+                        var loadJs=function(d,a){
+                            var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+                            var b=document.createElement("script");b.setAttribute("type","text/javascript");
+                            b.setAttribute("charset","UTF-8");
+                            b.setAttribute("src",d);
+                            if(typeof a==="function"){
+                                if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+
+
+        </section>
+
+        <div id="toTop" class="fa fa-angle-up"></div>
+    </div>
+
+    <footer id="footer" th:replace="blog/part/footer :: footer"></footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.imgbox.pack.js"></script>
+    <script src="/js/share.js"></script>
+    <script src="/admin/lib/prettify.min.js"></script>
+    <script src="/admin/lib/marked.min.js"></script>
+    <script src="/admin/js/editormd.js"></script>
+    <script src="/js/article-content.js"></script>
+    <script src="/js/lightgallery.min.js"></script>
+    <script src="/js/main.js"></script>
+
+
+</div>
+
+    <script src="/js/tctip-1.0.3.min.js"></script>
+    <script>
+        new tctip({
+            top: '20%',
+            button: {
+                id: 9,
+                type: 'dashang',
+            },
+            list: [
+                {
+                    type: 'alipay',
+                    qrImg: '/image/alipay.jpg'
+                }, {
+                    type: 'wechat',
+                    qrImg: '/image/wechat.jpg'
+                }, {
+                    type: 'bitcoin',
+                    qrContent: '1PhQySHF1ZuoRwoZ8G4CDLEtE6fAnD3GJP'
+                }
+            ]
+        }).init()
+    </script>
+</body>
+</html>

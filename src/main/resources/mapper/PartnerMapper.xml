@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eumji.zblog.mapper.PartnerMapper">
+    <!--通过username获取user对象-->
+   <select id="findAll" resultType="partner">
+       select * from partner
+   </select>
+    <!--获取一条-->
+   <select id="getPartnerById" resultType="partner">
+       select id,siteName,siteDesc,siteUrl,sort from partner where id = #{id}
+   </select>
+    <!--初始化加载 携带查询条件-->
+    <select id="loadPartner" resultType="partner">
+        select * from partner
+        <if test="param != null and param != ''">
+            where siteName like concat('%',#{param},'%')
+        </if>
+        limit #{pager.start},#{pager.limit}
+    </select>
+    <!--保存一条-->
+    <insert id="savePartner">
+        insert into partner(siteName, siteUrl, siteDesc, sort) VALUES (#{siteName},#{siteUrl},#{siteDesc},#{sort})
+    </insert>
+    <!--删除一条-->
+    <delete id="deletePartner">
+        delete from partner where id = #{id}
+    </delete>
+
+    <update id="updatePartner">
+        update partner set siteName = #{siteName},siteUrl = #{siteUrl},siteDesc = #{siteDesc},sort = #{sort} where id =#{id}
+    </update>
+
+
+    <select id="initPage" resultType="int">
+        SELECT count(id) from partner
+    </select>
+</mapper>
+

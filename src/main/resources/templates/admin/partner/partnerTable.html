@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<table class="table table-striped table-bordered table-hover dataTables-example">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>名称</th>
+        <th>站点地址</th>
+        <th>描述</th>
+        <th>排序</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr class="gradeX" th:each="partner : ${partnerList}">
+        <td th:text="${partner.id}"></td>
+        <td th:text="${partner.siteName}"></td>
+        <td><a th:href="${partner.siteUrl}" th:text="${partner.siteUrl}" target="_blank" rel="noreferrer" style="cursor:help;display:inline !important;"></a></td>
+        <td th:text="${partner.siteDesc}"></td>
+        <td th:text="${partner.sort}"></td>
+        <td th:data-id="${partner.id}">
+            <button  type="button" class="btn btn-primary btn-xs partner-edit" title="编辑">
+                编辑
+            </button>
+            <button  type="button" class="btn btn-danger btn-xs partner-delete" title="删除">
+                删除
+            </button>
+        </td>
+    </tr>
+
+
+    </tbody>
+</table>
+</html>

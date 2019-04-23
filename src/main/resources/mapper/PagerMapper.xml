@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eumji.zblog.mapper.PagerMapper">
+    <!--通过username获取user对象-->
+   <select id="loadCategoryPager" resultType="int">
+        select count(id) from article where status = 1 and categoryId = #{categoryId}
+   </select>
+
+
+
+    <select id="loadTagPager" resultType="int">
+        select count(articleId) from articletag JOIN article on article.id = articletag.articleId where tagId=#{tagId} and article.status=1
+    </select>
+
+</mapper>
+

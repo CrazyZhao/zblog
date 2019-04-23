@@ -1,0 +1,81 @@
+spring:
+  profiles:
+    active: dev
+    application:
+      name: 'zblog-service'
+app:
+  id: 1001
+
+##七牛云的key
+qiniu:
+  accessKey: canKgBzqR_AN_EviuOuWYUT4Vko3gi5dTNZFiQ4C
+  secretKey: feAWGHn_UmhGU2ckkHd9F2q2qFpC7lPqlemvEOCH
+  bucketName: eumji025
+  basePath: http://of8rkrh1w.bkt.clouddn.com/
+
+## 百度推送
+baidu:
+  task:
+    postUrl: http://data.zz.baidu.com/urls?site=www.backender.cn&token=5SkMJlek9wgFV7lV
+    baseUrl: http://www.backender.cn
+
+---
+#数据库连接配置
+spring:
+  profiles: dev
+apollo:
+  meta: http://118.31.70.84:8080
+---
+
+spring:
+#  datasource:
+#    url: jdbc:mysql://118.31.70.84:3306/zblog
+#    username:
+#    password:
+#    driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    mode: HTML5
+  #字符集和json格式工具
+  http:
+    encoding:
+      charset: utf-8
+    converters:
+      preferred-json-mapper: jackson
+    multipart:
+      max-file-size: 10MB
+  application:
+    name: eumji-blog
+
+  redis:
+#    database: 0
+#    host: 118.31.70.84
+#    port:
+#    password:
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+
+#mynatis配置
+mybatis:
+  type-aliases-package: com.eumji.zblog.vo
+  #mapper加载路径
+  mapper-locations: classpath:mapper/*Mapper.xml
+  #myatbis配置文件
+  config-location: classpath:mybatis-conf.xml
+#加载log4j2
+logging:
+  config: classpath:log4j2.xml
+  level: debug
+  file:
+server:
+  session-timeout : 3600
+  port: 8081
+  context-path: /
+
+
+
+
+

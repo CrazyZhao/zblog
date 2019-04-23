@@ -1,0 +1,18 @@
+<!--文章归档-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<body>
+<div class="widget-wrap" th:fragment="article-archive">
+    <h3 class="follow">文章存档</h3>
+    <div class="widget">
+        <ul class="archive-list">
+            <li class="archive-list-item" th:each="archive : ${archiveList}" style="cursor: pointer">
+                <!-- th:onclick="'loadarchive('+${archive.id}+')'" -->
+                <a class="archive-list-link" th:data-id="${archive.createTime}" th:text="${archive.createTime}"></a>
+                <span class="archive-list-count" th:text="${archive.count}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

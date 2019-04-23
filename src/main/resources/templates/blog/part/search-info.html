@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <section class="ins-section">
+        <header class="ins-section-header">文章</header>
+        <div class="ins-selectable ins-search-item" th:each="article : ${articleList}" th:data-url="'/article/details/'+${article.id}">
+            <header>
+                <i class="fa fa-file"></i>
+                [[${article.title}]]
+            </header>
+            <p class="ins-search-preview" th:text="${article.description}"></p>
+        </div>
+    </section>
+</body>
+</html>

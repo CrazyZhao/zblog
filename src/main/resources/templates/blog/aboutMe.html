@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="/image/avatar.jpg" />
+    <title>Bright | 博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="本站是Bright基于hexo博客主题+spring-boot作为后端开发而成.内容涵盖Java基础、JAVA的web框架、等其他技术的分享。也会包含一些个人在生活中的笔记或者有意思的事情.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bright | 博客">
+    <meta property="og:url" content="http://www.bright876.com">
+    <meta property="og:site_name" content="Bright | 博客">
+    <meta property="og:description" content="本站是Bright基于hexo博客主题+spring-boot作为后端开发而成。内容涵盖Java基础、JAVA的web框架、等其他技术的分享。也会包含一些个人在生活中的笔记或者有意思的事情.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Bright | 博客">
+    <meta name="twitter:description" content="本站是Bright基于hexo博客主题+spring-boot作为后端开发而成.内容涵盖Java基础、JAVA的web框架、等其他技术的分享。也会包含一些个人在生活中的笔记或者有意思的事情.">
+    <meta name="keywords" content="Spring Boot, Spring,Linux,Java,Hadoop" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/about.me.css">
+    <style>
+        a{
+            color: #000;
+        }
+        #footer{
+            position: fixed;
+            bottom: 0;
+            width:100%;
+            height: 30px;
+            background-color: #fbfffc;
+        }
+        body{
+            height: 100%;
+        }
+        .main{
+            position: relative;
+
+        }
+
+    </style>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-8254913025324557",
+            enable_page_level_ads: true
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-86515876-2', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    <!--百度统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d0860f6c7721ce1eda7a584188cae847";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <!--百度自动推送-->
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+    <script async type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+</head>
+
+<body>
+<header id="header" th:replace="blog/part/header :: header">
+</header>
+<div class="main">
+
+    <div class="account">
+        <div class="account-info">
+            <div class="account-top">
+                <div class="account-top-left">
+                    <img src="/image/avatar.jpg" alt="">
+                </div>
+                <!--<div class="account-top-right">
+                    <h2>李靖 </h2>
+                    <p>java Developer</p>
+                </div>-->
+                <div class="clear"></div>
+            </div>
+            <div class="account-bottom">
+                <div class="tabs">
+                    <nav>
+                        <a><span> </span>简介</a>
+                        <a><span class="icon1"></span>技能</a>
+                        <!--<a><span class="icon2"></span>爱好</a>-->
+                        <a><span class="icon3"></span>联系我</a>
+                        <!--<a><span class="icon4"></span>其他</a>-->
+                        <option></option>
+                        <option></option>
+                    </nav>
+                    <div class="content">
+                        <div class="text">
+                            <div class="text-right">
+                                <h4>Introduction</h4>
+                                <div class="clear"></div>
+                                <p>作者90后，毕业于武汉理工大学软件工程专业，目前个人从事Java后端相关的工作，
+                                    平时会学习一些新的技术或者框架，阅读一些后端的经典书籍，以提高自己对于技术的理解。</p>
+                                <p>欢迎访问BBS: <a href="http://bbs.backender.cn">bbs.backender.cn</a></p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="text">
+                            <div class="text-right">
+                                <h4>Skills</h4>
+                                <section class="container">
+                                    <div class="progress">
+                                        <span style="width: 50%;"><span>js</span></span>
+                                    </div>
+
+                                    <div class="progress">
+                                        <span class="green" style="width: 60%;"><span>database</span></span>
+                                    </div>
+
+                                    <!--<div class="progress">
+                                        <span class="orange" style="width: 50%;"><span>hadoop</span></span>
+                                    </div>-->
+
+                                    <div class="progress">
+                                        <span class="red" style="width: 70%;"><span>microservice</span></span>
+                                    </div>
+
+                                    <div class="progress">
+                                        <span class="blue" style="width: 80%;"><span>java</span></span>
+                                    </div>
+                                    <div class="progress">
+                                        <span style="width: 25%;"><span>python</span></span>
+                                    </div>
+                                    <!--<div class="progress">
+                                        <span style="width: 0%;"><span>go</span></span>
+                                    </div>-->
+                                </section>
+                                <div class="text_wrap" hidden>
+                                </div >
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="content">
+                        <div class="text">
+
+                            <div class="text-right">
+                                <h4>Hobby</h4>
+                                <div class="Hobby">
+                                    <div class="clear"></div>
+                                    <p></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>-->
+                    <div class="content">
+                        <div class="text ">
+                            <div class="text-right">
+                                <h4>Connection</h4>
+                                <div class="myinfo">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td>微信 | 13277926876</td>
+                                        </tr>
+                                        <tr>
+                                            <td>微信公众号 | 后端开发者中心</td>
+                                        </tr>
+                                        <tr>
+                                            <td>邮箱 | Bright_zhaobl@outlook.com</td>
+                                        </tr>
+                                        <!--<tr>
+                                            <td>telegram | Bright</td>
+                                        </tr>
+                                        <tr>
+                                            <td>github | <a href="https://github.com/bright876">bright876</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>OSC | <a href="https://git.oschina.net/bright876">bright876</a></td>
+                                        </tr>-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="content">
+                        <div class="text ">
+
+                            <div class="text-right">
+                                <h4>Ohter Talk</h4>
+                                &lt;!&ndash;<p>作者于2017年6月10日毕业了！！！！</p>
+                                <p>祝所以计科班同学前程似锦，工作顺利，学业有成，爱情美满，身体健康！！！</p>&ndash;&gt;
+                            </div>
+
+                        </div>
+
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer" th:replace="blog/part/footer :: footer"></footer>
+<script src="/js/jquery.min.js"></script>
+<script>
+    $(function () {
+        $(".search-form").attr("hidden",true);
+        $("#search-form-wrap").attr("hidden",true);
+        $('.tabs nav a').on('click', function () {
+            show_content($(this).index());
+        });
+        show_content(0);
+        function show_content(index) {
+            // Make the content visible
+            $('.tabs .content.visible').removeClass('visible');
+            $('.tabs .content:nth-of-type(' + (index + 1) + ')').addClass('visible');
+
+            // Set the tab to selected
+            $('.tabs nav a.selected').removeClass('selected');
+            $('.tabs nav a:nth-of-type(' + (index + 1) + ')').addClass('selected');
+        }
+    });
+    addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+</script>
+
+<script src="/js/tctip-1.0.3.min.js"></script>
+<script>
+    new tctip({
+        top: '20%',
+        button: {
+            id: 9,
+            type: 'dashang',
+        },
+        list: [
+            {
+                type: 'alipay',
+                qrImg: '/image/alipay.jpg'
+            }, {
+                type: 'wechat',
+                qrImg: '/image/wechat.jpg'
+            }, {
+                type: 'bitcoin',
+                qrContent: '1PhQySHF1ZuoRwoZ8G4CDLEtE6fAnD3GJP'
+            }
+        ]
+    }).init()
+</script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>

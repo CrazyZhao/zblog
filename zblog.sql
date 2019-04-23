@@ -155,7 +155,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', '98B32CF021ED0463848F67B8B02C353F', 'false', 'false', 'false', 'false', '2017-05-17 14:32:13');
+INSERT INTO `user` VALUES ('1', 'admin', 'FA5A66466E9006215E3F54BF5B2BEEA3', 'false', 'false', 'false', 'false', '2017-05-17 14:32:13');
 
 -- ----------------------------
 -- Table structure for user_info

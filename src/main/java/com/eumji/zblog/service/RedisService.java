@@ -9,6 +9,4 @@ public interface RedisService {
     Object get(String key);
 
     void sadd(String key, String... members);
-
-    
 }

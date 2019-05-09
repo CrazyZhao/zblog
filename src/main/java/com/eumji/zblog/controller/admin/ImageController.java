@@ -28,7 +28,6 @@ public class ImageController {
 
     private Logger logger = LoggerFactory.getLogger(AdminArticleController.class);
 
-    
 
     @Resource
     private UserService userService;
